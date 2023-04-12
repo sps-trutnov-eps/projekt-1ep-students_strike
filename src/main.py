@@ -22,7 +22,7 @@ rychlost = 5 # pixely / frame
 hodiny = pygame.time.Clock() 
  
 # nacteni obrazku 
-obrazek = pygame.image.load('C:/Users/ProkopS22/Desktop/pixil-frame-0.png') 
+obrazek = pygame.image.load('postava.png') 
 obrazek = pygame.transform.scale(obrazek, (velikost, velikost)) 
  
 # vytvoreni okna 
