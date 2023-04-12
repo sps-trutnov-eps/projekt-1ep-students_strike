@@ -1,4 +1,5 @@
-# pouzite knihovny 
+# pouzite knihovny
+import turtle
 import sys 
 import random 
 # pouzity framework 
@@ -12,7 +13,8 @@ ROZLISENI_Y = 1080
 FPS = 60 
 CERNA_BARVA = (0, 0, 0) 
 BILA_BARVA = (255, 255, 255) 
- 
+barva_hl = (128,0,128)
+barva_f = (255,0,0)
 velikost = 50
 x = 10
 y = 10
@@ -22,13 +24,9 @@ rychlost = 5 # pixely / frame
  
 # pomocny objekt pro omezeni FPS 
 hodiny = pygame.time.Clock() 
- 
-# nacteni obrazku 
-obrazek_hl = pygame.image.load('postava.png') 
-obrazek_hl = pygame.transform.scale(obrazek_hl, (velikost, velikost))
 
-obrazek_1 = pygame.image.load('postava.png') 
-obrazek_1 = pygame.transform.scale(obrazek_1, (velikost, velikost)) 
+
+
 
 # vytvoreni okna 
 okno = pygame.display.set_mode((ROZLISENI_X, ROZLISENI_Y)) 
@@ -71,21 +69,27 @@ while True:
     if pozice_y < 0: 
         pozice_y = 0
     
-    if x > pozice_x:
-        x -= rychlost
-    elif x < pozice_x:
-        x += rychlost
-    if y > pozice_y:
-        y -= rychlost
-    elif y < pozice_y:
-        y += rychlost
+
      
     # stanoveni barvy pozadi 
     okno.fill(BILA_BARVA) 
-     
-    # vykresleni obsahu okna 
-    okno.blit(obrazek_hl, (pozice_x, pozice_y)) 
-    okno.blit(obrazek_1, (x, y)) 
+    
+    # vykresleni obsahu okna  
+    
+    distance = ((pozice_x - x) ** 2 + (pozice_y - y) ** 2) ** 0.5
+    if distance > velikost + 10:
+        if x > pozice_x:
+            x -= rychlost
+        elif x < pozice_x:
+            x += rychlost
+        if y > pozice_y:
+            y -= rychlost
+        elif y < pozice_y:
+            y += rychlost
+    
+    pygame.draw.circle(okno,barva_hl,(pozice_x, pozice_y),velikost / 2)
+    pygame.draw.circle(okno,barva_f,(x, y),velikost / 2)
+
     # prekresleni obsahu okna 
     pygame.display.update() 
     # zastropovani FPS 
