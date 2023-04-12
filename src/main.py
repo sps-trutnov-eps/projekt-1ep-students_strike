@@ -14,6 +14,8 @@ CERNA_BARVA = (0, 0, 0)
 BILA_BARVA = (255, 255, 255) 
  
 velikost = 50
+x = 10
+y = 10
 pozice_x = (ROZLISENI_X - velikost) / 2 
 pozice_y = (ROZLISENI_Y - velikost) / 2 
 rychlost = 5 # pixely / frame 
@@ -22,9 +24,12 @@ rychlost = 5 # pixely / frame
 hodiny = pygame.time.Clock() 
  
 # nacteni obrazku 
-obrazek = pygame.image.load('postava.png') 
-obrazek = pygame.transform.scale(obrazek, (velikost, velikost)) 
- 
+obrazek_hl = pygame.image.load('postava.png') 
+obrazek_hl = pygame.transform.scale(obrazek_hl, (velikost, velikost))
+
+obrazek_1 = pygame.image.load('postava.png') 
+obrazek_1 = pygame.transform.scale(obrazek_1, (velikost, velikost)) 
+
 # vytvoreni okna 
 okno = pygame.display.set_mode((ROZLISENI_X, ROZLISENI_Y)) 
 pygame.display.set_caption('Interaktivní čtvereček') 
@@ -64,14 +69,23 @@ while True:
     if pozice_x < 0: 
         pozice_x = 0 
     if pozice_y < 0: 
-        pozice_y = 0 
+        pozice_y = 0
+    
+    if x > pozice_x:
+        x -= rychlost
+    elif x < pozice_x:
+        x += rychlost
+    if y > pozice_y:
+        y -= rychlost
+    elif y < pozice_y:
+        y += rychlost
      
     # stanoveni barvy pozadi 
     okno.fill(BILA_BARVA) 
      
     # vykresleni obsahu okna 
-    okno.blit(obrazek, (pozice_x, pozice_y)) 
-     
+    okno.blit(obrazek_hl, (pozice_x, pozice_y)) 
+    okno.blit(obrazek_1, (x, y)) 
     # prekresleni obsahu okna 
     pygame.display.update() 
     # zastropovani FPS 
