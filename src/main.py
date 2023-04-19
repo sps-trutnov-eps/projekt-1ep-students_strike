@@ -28,7 +28,7 @@ while True:
             ucitel_x += rychlost
         if ucitel_x > 200 - 30:
             ucitel_x -= rychlost
-        if ucitel_y < 690 - 30:
+        if ucitel_y > 690 - 30:
             ucitel_y += rychlost
         if ucitel_y < 690 - 30:
             ucitel_y += rychlost
@@ -38,9 +38,12 @@ while True:
             follower_x -= rychlost
         if follower_y < 690 - 30:
             follower_y += rychlost
-        if follower_y < 690 - 30:
+        if follower_y > 690 - 30:
             follower_y += rychlost
-            
+    if follower_x == 170 and follower_y == 660:
+        follower_x += rychlost
+        follower_y += rychlost
+        
     screen.fill((255,255,255))
     pygame.draw.circle(screen, (0,0,0), (follower_x, follower_y), 30)
     pygame.draw.circle(screen, (255,0,0), (ucitel_x, ucitel_y), 30)
