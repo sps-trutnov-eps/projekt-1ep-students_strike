@@ -4,8 +4,10 @@ pygame.init()
 
 clock = pygame.time.Clock()
 screen = pygame.display.set_mode((1820, 980))
-
 FPS = 60
+background = pygame.image.load('třída.png')
+background = pygame.transform.scale(background, (1820, 980))
+
 font = pygame.font.SysFont('Consolas', 50)
 game = True
 while game:
@@ -19,6 +21,6 @@ while game:
     if keys[pygame.K_ESCAPE]:
         pygame.quit()
         sys.exit()
-       
-    screen.fill((255, 255, 255,))   
+        
+    screen.blit(background,(0,0))
     pygame.display.update()
