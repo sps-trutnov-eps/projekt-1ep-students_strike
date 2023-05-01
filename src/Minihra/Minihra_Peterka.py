@@ -32,6 +32,7 @@ while True:
     
     klavesa = pygame.key.get_pressed()
     if klavesa[pygame.K_SPACE]:
+        
       
     
     
