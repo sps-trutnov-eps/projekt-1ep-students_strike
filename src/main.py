@@ -1,25 +1,59 @@
-import pygame, random, sys, math, time
+import pygame
+import random
+import sys
+import math
+import time
 pygame.init()
 # ---VARIABLES---
 screen = pygame.display.set_mode((1280, 720))
 FPS = 120
 # ---------------
+# ---- CLASS REWORK ----
+
+
+class Teacher_event():
+    def __init__(self,SCREEN, followers, teacher_start, teacher_speed):
+        self.SCREEN = SCREEN
+        self.TEACHER_START = teacher_start # Tuple x,y pozice startu učitele
+        self.teacher_pos = list(teacher_start) # Aktuální pozice učitele
+        self.TEACHER_SPEED = teacher_speed
+        #vybereme si index náhodného žáka, pro kterého půjdeme
+        student_index = random.randint(0,len(followers)-1)
+        self.target_pos = [followers[student_index].x, followers[student_index].y]
+    
+    def update_position(self, followers):
+        distance = ((follower_x - ucitel_x) ** 2 + (follower_y - ucitel_y) ** 2) ** 0.5 # Vzdálenost učitele od žáka
+        if distance > 60:
+            # Jde si pro žáka
+            if self.teacher_pos[0] > self.target_pos[0]:
+                self.teacher_pos[0] -= self.TEACHER_SPEED
+            elif self.teacher_pos[0] < self.target_pos[0]:
+                self.teacher_pos[0] += self.TEACHER_SPEED
+            if self.teacher_pos[1] > self.target_pos[1]:
+                self.teacher_pos[1] -= self.TEACHER_SPEED
+            elif self.teacher_pos[1] < self.target_pos[1]:
+                self.teacher_pos[1] += self.TEACHER_SPEED
+
+        
+
 clock = pygame.time.Clock()
 follower_x = random.randint(50 , 1200) 
 follower_y = random.randint(50, 600)
 rychlost = 2
-start_ucitel = (120,660)
+start_ucitel = (120, 660)
 ucitel_x = start_ucitel[0]
 ucitel_y = start_ucitel[1]
-reached_start_pos = False # This will be set to true when the teacher and the student both arrive at the start position
+# This will be set to true when the teacher and the student both arrive at the start position
+reached_start_pos = False
 while True:
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             pygame.quit()
             sys.exit()
-    distance = ((follower_x - ucitel_x) ** 2 + (follower_y - ucitel_y) ** 2) ** 0.5
+    distance = ((follower_x - ucitel_x) ** 2 +
+                (follower_y - ucitel_y) ** 2) ** 0.5
     if distance > 60:
-        #Jde si pro žáka
+        # Jde si pro žáka
         if ucitel_x > follower_x:
             ucitel_x -= rychlost
         elif ucitel_x < follower_x:
@@ -39,8 +73,9 @@ while True:
         if ucitel_y < start_ucitel[1]:
             ucitel_y += rychlost
         # Posouvani vedenýho folowera
-        if not reached_start_pos: 
-            flwr_start_dist = [follower_x-start_ucitel[0],follower_y-start_ucitel[1]]
+        if not reached_start_pos:
+            flwr_start_dist = [follower_x-start_ucitel[0],
+                               follower_y-start_ucitel[1]]
             if abs(flwr_start_dist[0]) >= rychlost:
                 if follower_x < start_ucitel[0]:
                     follower_x += rychlost
@@ -65,10 +100,10 @@ while True:
             if follower_x == start_ucitel[0] and follower_y == start_ucitel[1]:
                 reached_start_pos = True
         if reached_start_pos == True:
-            follower_y +=1
-      
-    screen.fill((255,255,255))
-    pygame.draw.circle(screen, (0,0,0), (follower_x, follower_y), 30)
-    pygame.draw.circle(screen, (255,0,0), (ucitel_x, ucitel_y), 30)
+            follower_y += 1
+
+    screen.fill((255, 255, 255))
+    pygame.draw.circle(screen, (0, 0, 0), (follower_x, follower_y), 30)
+    pygame.draw.circle(screen, (255, 0, 0), (ucitel_x, ucitel_y), 30)
     pygame.display.update()
     clock.tick(FPS)
