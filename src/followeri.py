@@ -25,7 +25,9 @@ rychlost = 3 # pixely / frame
 
 pozadí = pygame.image.load("chodba.png")
 pozadí = pygame.transform.scale(pozadí, (ROZLISENI_X , ROZLISENI_Y))
-  
+cislo_patra = 1
+
+navstiveny_třídy = []
 # pomocny objekt pro omezeni FPS  
 hodiny = pygame.time.Clock()  
 
@@ -42,7 +44,7 @@ foloweri = []
 for i in range(pocet_foloweri): 
     foloweri.append(foloweri_class(random.randint(velikost, ROZLISENI_X - velikost), random.randint(velikost, ROZLISENI_Y - velikost))) 
  
- 
+
 # vytvoreni okna  
 okno = pygame.display.set_mode((ROZLISENI_X, ROZLISENI_Y))  
 pygame.display.set_caption('Strike')  
@@ -83,7 +85,51 @@ while True:
         pozice_x = velikost / 2 
     if pozice_y < velikost / 2:  
         pozice_y = velikost / 2 
-     
+#
+        
+    if pozice_x > 100 and pozice_x < 215 and pozice_y > 0 and pozice_y < 5 + velikost and klavesy[pygame.K_e]:
+        poradi_dveri = 1
+        cislo_dveri = cislo_patra * 10 + poradi_dveri
+        if cislo_dveri not in navstiveny_třídy:
+            navstiveny_třídy.append(cislo_dveri)
+            print("baf") 
+         
+    if pozice_x > 580 and pozice_x < 695 and pozice_y > 0 and pozice_y < 5 + velikost and klavesy[pygame.K_e]:
+        poradi_dveri = 2
+        cislo_dveri = cislo_patra * 10 + poradi_dveri
+        if cislo_dveri not in navstiveny_třídy:
+            navstiveny_třídy.append(cislo_dveri)
+            print("baf 1") 
+    
+    if pozice_x > 1065 and pozice_x < 1180 and pozice_y > 0 and pozice_y < 5 + velikost and klavesy[pygame.K_e]:
+        poradi_dveri = 3
+        cislo_dveri = cislo_patra * 10 + poradi_dveri
+        if cislo_dveri not in navstiveny_třídy:
+            navstiveny_třídy.append(cislo_dveri)
+            print("baf 2")
+    
+    if pozice_x > 100 and pozice_x < 215 and pozice_y > 5 + velikost and pozice_y < ROZLISENI_Y and klavesy[pygame.K_e]:
+        poradi_dveri = 4
+        cislo_dveri = cislo_patra * 10 + poradi_dveri
+        if cislo_dveri not in navstiveny_třídy:
+            navstiveny_třídy.append(cislo_dveri)
+            print("baf 4") 
+         
+    if pozice_x > 580 and pozice_x < 695 and pozice_y > 5 + velikost and pozice_y < ROZLISENI_Y and klavesy[pygame.K_e]:
+        poradi_dveri = 5
+        cislo_dveri = cislo_patra * 10 + poradi_dveri
+        if cislo_dveri not in navstiveny_třídy:
+            navstiveny_třídy.append(cislo_dveri)
+            print("baf 5") 
+    
+    if pozice_x > 1065 and pozice_x < 1180 and pozice_y > 5 + velikost and pozice_y < ROZLISENI_Y and klavesy[pygame.K_e]:
+        poradi_dveri = 6
+        cislo_dveri = cislo_patra * 10 + poradi_dveri
+        if cislo_dveri not in navstiveny_třídy:
+            navstiveny_třídy.append(cislo_dveri)
+            print("baf 6")
+
+       
      
  
      
