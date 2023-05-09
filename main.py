@@ -22,7 +22,7 @@ run = True
 
 # Vytvoření unkce pro náhodný výběr obrázku
 def RandomImg():
-    random.choice(image)
+    random.choice(image)     
 
 # Hlavní smyčka hry
 while run:
