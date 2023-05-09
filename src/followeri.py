@@ -1,15 +1,16 @@
 # pouzite knihovny 
 import sys  
-import random  
+import random
+import time
 # pouzity framework  
 import pygame  
 # spusteni frameworku  
 pygame.init()  
   
 # pocatecni nastaveni hodnot  
-ROZLISENI_X = 1920 
-ROZLISENI_Y = 1080 
-FPS = 120 
+ROZLISENI_X = 1280 
+ROZLISENI_Y = 720
+FPS = 60
 CERNA_BARVA = (0, 0, 0)  
 BILA_BARVA = (255, 255, 255)  
 barva_hl = (128,0,128) 
@@ -20,11 +21,14 @@ x = 10
 y = 10 
 pozice_x = (ROZLISENI_X - velikost) / 2  
 pozice_y = (ROZLISENI_Y - velikost) / 2  
-rychlost = 3 # pixely / frame  
+rychlost = 3 # pixely / frame
+
+pozadí = pygame.image.load("chodba.png")
+pozadí = pygame.transform.scale(pozadí, (ROZLISENI_X , ROZLISENI_Y))
   
 # pomocny objekt pro omezeni FPS  
 hodiny = pygame.time.Clock()  
- 
+
 class foloweri_class: 
     def __init__(self, x, y): 
         self.x = x 
@@ -71,20 +75,23 @@ while True:
         pozice_y -= rychlost  
       
 #kolize hráče
-    if pozice_x > ROZLISENI_X:  
-        pozice_x = ROZLISENI_X 
-    if pozice_y > ROZLISENI_Y:  
-        pozice_y = ROZLISENI_Y 
-    if pozice_x < 0:  
-        pozice_x = 0  
-    if pozice_y < 0:  
-        pozice_y = 0 
+    if pozice_x > ROZLISENI_X - velikost / 2:  
+        pozice_x = ROZLISENI_X - velikost / 2 
+    if pozice_y > ROZLISENI_Y - velikost / 2:  
+        pozice_y = ROZLISENI_Y - velikost / 2
+    if pozice_x < velikost / 2:  
+        pozice_x = velikost / 2 
+    if pozice_y < velikost / 2:  
+        pozice_y = velikost / 2 
      
      
  
      
-    # stanoveni barvy pozadi  
-    okno.fill(BILA_BARVA)  
+    # stanoveni barvy pozadi
+    
+    okno.blit(pozadí, (0, 0))
+    
+    
      
 #kolize foloweru na hrace
     for i in range(pocet_foloweri): 
@@ -112,14 +119,14 @@ while True:
                 foloweri[i].y -= rychlost
 #kolize foloweru stěn 
     for i in range(pocet_foloweri):
-        if foloweri[i].x > ROZLISENI_X:
-            foloweri[i].x = ROZLISENI_X
-        elif foloweri[i].x < 0: 
-            foloweri[i].x = 0
-        if foloweri[i].y > ROZLISENI_Y: 
-            foloweri[i].y = ROZLISENI_Y 
-        elif foloweri[i].y < 0: 
-            foloweri[i].y = 0
+        if foloweri[i].x > ROZLISENI_X - velikost / 2:
+            foloweri[i].x = ROZLISENI_X - velikost / 2
+        elif foloweri[i].x < velikost / 2: 
+            foloweri[i].x = velikost / 2
+        if foloweri[i].y > ROZLISENI_Y - velikost / 2: 
+            foloweri[i].y = ROZLISENI_Y - velikost / 2
+        elif foloweri[i].y < velikost / 2: 
+            foloweri[i].y = velikost / 2
 #kolize folowerů na folowera
     for i in range(pocet_foloweri): 
         for y in range(pocet_foloweri): 
@@ -136,14 +143,14 @@ while True:
                         foloweri[i].y -= rychlost
                         
 
-             
+    
 #vykreslení folowerů
     for i in range(pocet_foloweri): 
         pygame.draw.circle(okno, barva_foloweri, (foloweri[i].x, foloweri[i].y), velikost / 2) 
          
     pygame.draw.circle(okno,barva_hl,(pozice_x, pozice_y),velikost / 2) 
   #  pygame.draw.circle(okno,barva_foloweri,(x, y),velikost / 2) 
- 
+    
     # prekresleni obsahu okna  
     pygame.display.update()  
     # zastropovani FPS  
