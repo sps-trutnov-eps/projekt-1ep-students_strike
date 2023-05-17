@@ -23,8 +23,10 @@ pozice_x = (ROZLISENI_X - velikost) / 2
 pozice_y = (ROZLISENI_Y - velikost) / 2  
 rychlost = 3 # pixely / frame
 
-pozadí = pygame.image.load("chodba.png")
-pozadí = pygame.transform.scale(pozadí, (ROZLISENI_X , ROZLISENI_Y))
+pozadí_prizemi = pygame.image.load("chodba.png")
+pozadí_prizemi = pygame.transform.scale(pozadí_prizemi, (ROZLISENI_X , ROZLISENI_Y))
+pozadi_nadprizemi = pygame.image.load("chodba 1.png")
+pozadi_nadprizemi = pygame.transform.scale(pozadi_nadprizemi, (ROZLISENI_X , ROZLISENI_Y))
 cislo_patra = 1
 cislo_patra_font = pygame.font.Font(None, 72) # Font pro vykresení čísla patra
 
@@ -109,35 +111,39 @@ while True:
             navstiveny_třídy.append(cislo_dveri)
             print("baf 2")
     
-    if pozice_x > 100 and pozice_x < 215 and pozice_y > 5 + velikost and pozice_y < ROZLISENI_Y and klavesy[pygame.K_e]:
+    if pozice_x > 100 and pozice_x < 215 and pozice_y > ROZLISENI_Y - (5 + velikost) and pozice_y < ROZLISENI_Y and klavesy[pygame.K_e]:
         poradi_dveri = 4
         cislo_dveri = cislo_patra * 10 + poradi_dveri
         if cislo_dveri not in navstiveny_třídy:
             navstiveny_třídy.append(cislo_dveri)
             print("baf 4") 
          
-    if pozice_x > 580 and pozice_x < 695 and pozice_y > 5 + velikost and pozice_y < ROZLISENI_Y and klavesy[pygame.K_e]:
+    if pozice_x > 580 and pozice_x < 695 and pozice_y > ROZLISENI_Y - (5 + velikost) and pozice_y < ROZLISENI_Y and klavesy[pygame.K_e]:
         poradi_dveri = 5
         cislo_dveri = cislo_patra * 10 + poradi_dveri
         if cislo_dveri not in navstiveny_třídy:
             navstiveny_třídy.append(cislo_dveri)
             print("baf 5") 
     
-    if pozice_x > 1065 and pozice_x < 1180 and pozice_y > 5 + velikost and pozice_y < ROZLISENI_Y and klavesy[pygame.K_e]:
+    if pozice_x > 1065 and pozice_x < 1180 and pozice_y > ROZLISENI_Y - (5 + velikost) and pozice_y < ROZLISENI_Y and klavesy[pygame.K_e]:
         poradi_dveri = 6
         cislo_dveri = cislo_patra * 10 + poradi_dveri
         if cislo_dveri not in navstiveny_třídy:
             navstiveny_třídy.append(cislo_dveri)
             print("baf 6")
-
+    
+    if pozice_x > 0 and pozice_x < 290 and pozice_y > 200 and pozice_y < 330 and klavesy[pygame.K_e]: 
+        cislo_patra = cislo_patra + 1
+        print(cislo_patra)
        
      
  
      
     # stanoveni barvy pozadi
-    
-    okno.blit(pozadí, (0, 0))
-    
+    if cislo_patra == 1:
+        okno.blit(pozadí_prizemi, (0, 0))
+    elif cislo_patra >= 2:
+        okno.blit(pozadi_nadprizemi, (0, 0))
     
      
 #kolize foloweru na hrace
