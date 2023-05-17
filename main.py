@@ -9,20 +9,54 @@ pygame.init()
 # Načítání náhodných obrázků do hry ze složky
 image = ["1.png", "2.png", "3.png", "4.png", "5.png"]
 
-# Základní parametry okna
-clock = pygame.time.Clock()
+# Základní parametry okna a hry
+white = (255, 255, 255)
+black = (0, 0, 0)
 screen = pygame.display.set_mode((1280, 720))
-pygame.display.set_caption("Killbot")
-pygame.image.load("src/pozadí.png")
+screen.fill("white")
+clock = pygame.time.Clock()
+pygame.display.set_caption("")
 
 # Základní paramtery hry
-FPS = 120
-font = pygame.font.Font("src/font.ttf", 30)
+font = pygame.font.SysFont(None, 15)
+input_box = pygame.Rect(200, 200, 300, 50)
+color_inactive = pygame.Color("white")
+color_active = pygame.Color("black")
+color = color_inactive
+text = ""
+active = True
+done =  False
+FPS = 60
 run = True
 
 # Vytvoření unkce pro náhodný výběr obrázku
 def RandomImg():
-    random.choice(image)     
+    random.choice(image)
+
+while not done:
+    for event in pygame.event.get():
+        if event == pygame.QUIT:
+            pygame.quit()
+        # Co se stane po kliknutí do textového políčka   
+        if event.type == pygame.MOUSEBUTTONDOWN:
+            if input_box.collidepoint(event.pos):
+                active = not active
+            else:
+                active = False
+            # Změna barvy textového políčka
+            color = color_active if active else color_inactive
+            
+        if event.type == pygame.KEYDOWN:
+            if  active:
+                if event.key == pygame.K_RETURN:
+                    print(text)
+                    text = ""
+                # Odstranění posledního písmenka
+                elif event.key == pygame.K_BACKSPACE and text:
+                    text = text[:-1]
+                else:
+                    text += event.unicode
+            
 
 # Hlavní smyčka hry
 while run:
