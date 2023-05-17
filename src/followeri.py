@@ -133,8 +133,23 @@ while True:
             print("baf 6")
     
     if pozice_x > 0 and pozice_x < 290 and pozice_y > 200 and pozice_y < 330 and klavesy[pygame.K_e]: 
+        
         cislo_patra = cislo_patra + 1
-        print(cislo_patra)
+        
+        pozice_x = 290
+        pozice_y = 415
+        for i in range(pocet_foloweri):
+            foloweri[i].x = random.randint(0, 290)
+            foloweri[i].y = random.randint(350, 480)
+    if pozice_x > 0 and pozice_x < 290 and pozice_y > 350 and pozice_y < 480 and klavesy[pygame.K_e]: 
+        if cislo_patra != 1:
+            cislo_patra = cislo_patra - 1
+            
+            pozice_x = 290
+            pozice_y = 415
+            for i in range(pocet_foloweri):
+                foloweri[i].x = random.randint(0, 290)
+                foloweri[i].y = random.randint(200, 330)
        
      
  
