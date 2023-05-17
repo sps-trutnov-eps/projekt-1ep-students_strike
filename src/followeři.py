@@ -2,6 +2,7 @@
 import turtle
 import sys 
 import random 
+# import
 # pouzity framework 
 import pygame 
 # spusteni frameworku 
@@ -123,7 +124,11 @@ while True:
                         c_list[i].y += rychlost
                     elif c_list[i].y < c_list[y].y:
                         c_list[i].y -= rychlost
-            
+    #EVENT TEST ENVIROMENT
+    created_event = False
+    if created_event == False:
+        pass
+    #END OF TEST ENVIROMENT        
             
     for i in range(počet_f):
         pygame.draw.circle(okno, barva_f, (c_list[i].x, c_list[i].y), velikost / 2)
