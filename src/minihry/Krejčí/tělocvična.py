@@ -9,6 +9,7 @@ pohyb3 = False
 pohyb4 = False
 pohyb5 = False
 
+bila= (255,255,255)
 
 screen_width = 1280
 screen_height = 720
@@ -50,11 +51,13 @@ ball5_rect = ball.get_rect()
 ball5_rect.x = 120
 ball5_rect.y = 225
 
+zivot = 1
 
+konecna = pygame.image.load('konecna.png')
+konecna = pygame.transform.scale(konecna,(1280,720))
 
-
-
-
+vyhra = pygame.image.load('vyhra.png')
+vyhra = pygame.transform.scale(vyhra,(1280,720))
 
 student = pygame.image.load('student-removebg-preview-removebg-preview-removebg-preview.png')
 student = pygame.transform.scale(student,(105,105))
@@ -93,7 +96,7 @@ while True:
             pygame.quit()
             sys.exit()
             
-            
+      
     screen.blit(backround, (0,0))
     screen.blit(ball, ball_rect)
     screen.blit(student, student_rect)
@@ -106,6 +109,8 @@ while True:
     screen.blit(ball3, ball3_rect)
     screen.blit(ball4, ball4_rect)
     screen.blit(ball5, ball5_rect)
+    
+    
     
     
     klavesa = pygame.key.get_pressed()
@@ -157,23 +162,66 @@ while True:
         
     if ball2_rect.x > 1280:
         ball2_rect.x = 250
-        pohyb = False
+        pohyb2 = False
     
     if ball3_rect.x > 1280:
         ball3_rect.x = 250
-        pohyb = False
+        pohyb3 = False
     
     if ball4_rect.x > 1280:
         ball4_rect.x = 120
-        pohyb = False
+        pohyb4 = False
     
     if ball5_rect.x > 1280:
         ball5_rect.x = 120
-        pohyb = False
+        pohyb5 = False
     
     
     
+    kolize1 = pygame.Rect.colliderect(ball_rect, student_rect)
+    kolize2 = pygame.Rect.colliderect(ball2_rect, student_rect)
+    kolize3 = pygame.Rect.colliderect(ball3_rect, student_rect)
+    kolize4 = pygame.Rect.colliderect(ball4_rect, student_rect)
+    kolize5 = pygame.Rect.colliderect(ball5_rect, student_rect)
     
     
+    if kolize1:
+        ball_rect.x = 250
+        zivot -= 1
+        pohyb1 = False
+    
+    if kolize2:
+        ball2_rect.x = 250
+        zivot -= 1
+        pohyb2 = False
+    
+    if kolize3:
+        ball3_rect.x = 250
+        zivot -= 1
+        pohyb3 = False
+    
+    if kolize4:
+        ball4_rect.x = 120
+        zivot -= 1
+        pohyb4 = False 
+    
+    if kolize5:
+        ball5_rect.x = 120
+        zivot -= 1
+        pohyb5 = False
+   
+    if zivot <= 0 :
+        screen.blit(konecna, (0,0))
+        
+    if elapsed_time >= 1 :
+        screen.blit(vyhra, (0,0))
+    
+    
+    
+   
+   
+   
+   
+   
     clock.tick(FPS)
     pygame.display.update()
