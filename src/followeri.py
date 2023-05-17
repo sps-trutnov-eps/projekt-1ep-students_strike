@@ -26,6 +26,7 @@ rychlost = 3 # pixely / frame
 pozadí = pygame.image.load("chodba.png")
 pozadí = pygame.transform.scale(pozadí, (ROZLISENI_X , ROZLISENI_Y))
 cislo_patra = 1
+cislo_patra_font = pygame.font.Font(None, 72) # Font pro vykresení čísla patra
 
 navstiveny_třídy = []
 # pomocny objekt pro omezeni FPS  
@@ -197,6 +198,11 @@ while True:
     pygame.draw.circle(okno,barva_hl,(pozice_x, pozice_y),velikost / 2) 
   #  pygame.draw.circle(okno,barva_foloweri,(x, y),velikost / 2) 
     
+    #vykreslení čísel pater
+    text1 = cislo_patra_font.render(("Patro " + str(cislo_patra + 1)), True, CERNA_BARVA)
+    text2 = cislo_patra_font.render(("Patro " + str(cislo_patra- 1) ), True, CERNA_BARVA)
+    okno.blit(text1, (50, ROZLISENI_Y/2- 200))
+    okno.blit(text2, (50, ROZLISENI_Y/2 + 125))
     # prekresleni obsahu okna  
     pygame.display.update()  
     # zastropovani FPS  
