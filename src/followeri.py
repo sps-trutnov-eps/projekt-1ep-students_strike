@@ -37,6 +37,11 @@ hodiny = pygame.time.Clock()
 # fáze eventů
 ucitel_active = False
 ucitel_start_patro = cislo_patra
+ucitel_spawn_interval = [2, 10]
+ucitel_spawn_time = 5
+def find_ucitel_spawn_time():
+    ucitel_spawn_time = random.randint(ucitel_spawn_interval[0], ucitel_spawn_interval[1]) + time.time()
+    return ucitel_spawn_time
 
 class foloweri_class: 
     def __init__(self, x, y): 
@@ -215,10 +220,11 @@ while True:
                     elif foloweri[i].y < foloweri[y].y: 
                         foloweri[i].y -= rychlost
     
-    # Ucitel event                             
-    if ucitel_active == False:
+    # Ucitel event
+    if ucitel_active == False and ucitel_spawn_time < time.time():
+
         ucitel_start_patro = cislo_patra  
-        ucitel = te.Teacher_event(okno,foloweri,(100,650),2,30) #*Měnění velikosti nefuguje správně
+        ucitel = te.Teacher_event(okno,foloweri,(148,680),2,30) #*Měnění velikosti nefuguje správně
         ucitel_active = True
     if ucitel_active == True:
         foloweri = ucitel.update(foloweri)
@@ -226,6 +232,8 @@ while True:
         ucitel_active = False
     if ucitel_start_patro is not cislo_patra:
         ucitel_active = False
+    if ucitel_active == False and ucitel_spawn_time < time.time() and ucitel.teacher_done == True:
+        ucitel_spawn_time = find_ucitel_spawn_time()
     
 
 #vykreslení folowerů
