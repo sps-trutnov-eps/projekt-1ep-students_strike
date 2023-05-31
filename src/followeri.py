@@ -2,6 +2,7 @@
 import sys  
 import random
 import time
+import teacher_event as te
 # pouzity framework  
 import pygame  
 # spusteni frameworku  
@@ -33,6 +34,9 @@ cislo_patra_font = pygame.font.Font(None, 72) # Font pro vykresení čísla patr
 navstiveny_třídy = []
 # pomocny objekt pro omezeni FPS  
 hodiny = pygame.time.Clock()  
+# fáze eventů
+ucitel_active = False
+ucitel_start_patro = cislo_patra
 
 class foloweri_class: 
     def __init__(self, x, y): 
@@ -54,6 +58,7 @@ pygame.display.set_caption('Strike')
   
 # vykreslovaci smycka  
 while True:  
+    pocet_foloweri = len(foloweri)
     # jake nastaly udalosti?  
     for udalost in pygame.event.get():  
         # byla nektera z nich typu QUIT?  
@@ -209,11 +214,22 @@ while True:
                         foloweri[i].y += rychlost 
                     elif foloweri[i].y < foloweri[y].y: 
                         foloweri[i].y -= rychlost
-                        
-
     
+    # Ucitel event                             
+    if ucitel_active == False:
+        ucitel_start_patro = cislo_patra  
+        ucitel = te.Teacher_event(okno,foloweri,(100,650),2,30) #*Měnění velikosti nefuguje správně
+        ucitel_active = True
+    if ucitel_active == True:
+        foloweri = ucitel.update(foloweri)
+    if ucitel.teacher_done == True:
+        ucitel_active = False
+    if ucitel_start_patro is not cislo_patra:
+        ucitel_active = False
+    
+
 #vykreslení folowerů
-    for i in range(pocet_foloweri): 
+    for i in range(len(foloweri)): 
         pygame.draw.circle(okno, barva_foloweri, (foloweri[i].x, foloweri[i].y), velikost / 2) 
          
     pygame.draw.circle(okno,barva_hl,(pozice_x, pozice_y),velikost / 2) 

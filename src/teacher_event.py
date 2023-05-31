@@ -10,11 +10,13 @@ pygame.init()
 
 
 class Teacher_event():
-    def __init__(self,SCREEN, followers, teacher_start, teacher_speed):
-        self.SCREEN = SCREEN
+    def __init__(self,SCREEN, followers, teacher_start, teacher_speed, teacher_size):
+        self.SCREEN = SCREEN #pro vykreslení učitele
+        self.teacher_done = False #Indikuje main programu kdy zrušit učitele
         self.TEACHER_START = teacher_start # Tuple x,y pozice startu učitele
         self.teacher_pos = list(teacher_start) # Aktuální pozice učitele
         self.TEACHER_SPEED = teacher_speed
+        self.TEACHER_SIZE = teacher_size
         self.original_followers = followers # List followeru ktery byl na začátku
         #vybereme si index náhodného žáka, pro kterého půjdeme
         self.student_index = random.randint(0,len(followers)-1)
@@ -55,7 +57,7 @@ class Teacher_event():
                 self.teacher_pos[1] += self.TEACHER_SPEED
                 # Posouvani vedenýho folowera
             if not self.reached_start_pos: 
-                flwr_start_dist = [self.target_pos[0]-self.start_ucitel[0],self.target_pos[1]-self.start_ucitel[1]]
+                flwr_start_dist = [self.target_pos[0]-self.TEACHER_START[0],self.target_pos[1]-self.TEACHER_START[1]]
                 if abs(flwr_start_dist[0]) >= self.TEACHER_SPEED:
                     if self.target_pos[0] < self.TEACHER_START[0]:
                         self.target_pos[0] += self.TEACHER_SPEED
@@ -64,7 +66,7 @@ class Teacher_event():
                 else:
                     if self.target_pos[0] < self.TEACHER_START[0]:
                         self.target_pos[0] += 1
-                    if self.target_pos[0] > self.start_ucitel[0]:
+                    if self.target_pos[0] > self.TEACHER_START[0]:
                            self.target_pos[0] -= 1
 
                 if abs(flwr_start_dist[1]) >= self.TEACHER_SPEED:
@@ -78,11 +80,15 @@ class Teacher_event():
                     if self.target_pos[1] > self.TEACHER_START[1]:
                         self.target_pos[1] -= 1
                 if self.target_pos[0] == self.TEACHER_START[0] and self.target_pos[1] == self.TEACHER_START[1]:
-                    reached_start_pos = True
-            if reached_start_pos == True:
+                    self.reached_start_pos = True
+            if self.reached_start_pos == True:
                 self.target_pos[1] += 1
-    
+            pygame.draw.circle(self.SCREEN,(255,0,0),(self.target_pos[0],self.target_pos[1]),25)
+        if self.teacher_pos[1] > self.SCREEN.get_rect().height + self.TEACHER_SIZE:
+            self.teacher_done = True
 
+
+        pygame.draw.circle(self.SCREEN,(0,0,0),(self.teacher_pos[0],self.teacher_pos[1]),self.TEACHER_SIZE)
         return followers # tento event má efekt na list followeru(odebírá followery) a tak puvodnimu programu vraci upraveny list
             
             
