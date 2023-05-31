@@ -8,15 +8,13 @@ FPS = 60
 w = 1280
 h = 720
 rychlost = 11
-enemy1_rychlost = 2
-enemy2_rychlost = 1.5
-enemy3_rychlost = 1.2
-enemy4_rychlost = 2.5
-enemy5_rychlost = 1
-enemy6_rychlost = 0.7                
-enemy7_rychlost = 0.5
+enemy1_rychlost = 2.5
+enemy2_rychlost = 4
+enemy3_rychlost = 2.4
+enemy4_rychlost = 3
+enemy5_rychlost = 3.4                           
+enemy6_rychlost = 2.3                
 minule_stisknuto = False 
-
 
 
 font = pygame.font.SysFont("arialblack", 80)
@@ -60,6 +58,22 @@ enemy4_rect = enemy4.get_rect()
 enemy4_rect.x = -110
 enemy4_rect.y = 400
 
+enemy5 = pygame.image.load("enemy5.png")
+enemy5 = pygame.transform.scale(enemy5, (300,160))
+enemy5_rect = enemy5.get_rect()
+enemy5_rect.x = -110
+enemy5_rect.y = 500
+
+enemy6 = pygame.image.load("enemy6.png")
+enemy6 = pygame.transform.scale(enemy6, (300,160))
+enemy6_rect = enemy6.get_rect()
+enemy6_rect.x = -110
+enemy6_rect.y = 600
+
+prohra = pygame.image.load("Prohra.png")
+prohra = pygame.transform.scale(prohra, (1280,720))
+prohra_rect = prohra.get_rect()
+
 
 
 timer_event = pygame.USEREVENT + 1 
@@ -76,9 +90,8 @@ while True:
         elif udalost.type == timer_event:
             time_left -=1
    
-   
-    
-
+        
+        
 
     
         klavesa = pygame.key.get_pressed() 
@@ -108,21 +121,22 @@ while True:
         enemy4_rect.x = 1090
         
     
-
+    enemy5_rect.x += enemy5_rychlost
+    if enemy5_rect.x > 1090:
+        enemy5_rect.x = 1090
+        
+    enemy6_rect.x += enemy6_rychlost
+    if enemy6_rect.x > 1090:
+        enemy6_rect.x = 1090
+        
     
         
-        
-        
-        
-        
     
-
-
    
         
 
     timer_text = font.render(f"{time_left}", True, (255,255,255))
-    
+    hitbox_c = pygame.draw.rect(screen, (0,0,0),(w -50, 0, w, h))
     screen.blit(bg, bg_rect)
     screen.blit(hl_postava_postoj, hl_postava_postoj_rect)
     screen.blit(enemy1_postoj, enemy1_postoj_rect)
@@ -130,7 +144,18 @@ while True:
     screen.blit(enemy2_postoj, enemy2_postoj_rect)
     screen.blit(enemy3, enemy3_rect)
     screen.blit(enemy4, enemy4_rect)
+    screen.blit(enemy5, enemy5_rect)
+    screen.blit(enemy6, enemy6_rect)
     
+    kolize1 = pygame.Rect.colliderect(enemy1_postoj_rect, hitbox_c)
+    kolize2 = pygame.Rect.colliderect(enemy2_postoj_rect, hitbox_c)
+    kolize3 = pygame.Rect.colliderect(enemy3_rect, hitbox_c)
+    kolize4 = pygame.Rect.colliderect(enemy4_rect, hitbox_c)
+    kolize5 = pygame.Rect.colliderect(enemy5_rect, hitbox_c)
+    kolize6 = pygame.Rect.colliderect(enemy6_rect, hitbox_c)
+    
+    if kolize1:
+        screen.blit(prohra, (0, 0))
     
     
     pygame.display.update()
