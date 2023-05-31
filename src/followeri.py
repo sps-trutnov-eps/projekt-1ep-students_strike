@@ -18,7 +18,8 @@ barva_foloweri = (255,0,0)
 pocet_foloweri = 10
 velikost = 50 
 x = 10 
-y = 10 
+y = 10
+z = 0
 pozice_x = (ROZLISENI_X - velikost) / 2  
 pozice_y = (ROZLISENI_Y - velikost) / 2  
 rychlost = 3 # pixely / frame
@@ -27,31 +28,45 @@ pozadí_prizemi = pygame.image.load("chodba.png")
 pozadí_prizemi = pygame.transform.scale(pozadí_prizemi, (ROZLISENI_X , ROZLISENI_Y))
 pozadi_nadprizemi = pygame.image.load("chodba 1.png")
 pozadi_nadprizemi = pygame.transform.scale(pozadi_nadprizemi, (ROZLISENI_X , ROZLISENI_Y))
+folower_obrazek_1 = pygame.image.load("postava_black.png")
+folower_obrazek_1 = pygame.transform.scale(folower_obrazek_1, (velikost , velikost))
+folower_obrazek_2 = pygame.image.load("postava_blond.png")
+folower_obrazek_2 = pygame.transform.scale(folower_obrazek_2, (velikost , velikost))
+folower_obrazek_3 = pygame.image.load("postava_blue.png")
+folower_obrazek_3 = pygame.transform.scale(folower_obrazek_3, (velikost , velikost))
+folower_obrazek_4 = pygame.image.load("postava_pleska.png")
+folower_obrazek_4 = pygame.transform.scale(folower_obrazek_4, (velikost , velikost))
+folower_obrazek_5 = pygame.image.load("postava_purple.png")
+folower_obrazek_5 = pygame.transform.scale(folower_obrazek_5, (velikost , velikost))
 cislo_patra = 1
 cislo_patra_font = pygame.font.Font(None, 72) # Font pro vykresení čísla patra
+foloweri_obrazky_list = [folower_obrazek_1, folower_obrazek_2, folower_obrazek_3, folower_obrazek_4, folower_obrazek_5]
 
 navstiveny_třídy = []
 # pomocny objekt pro omezeni FPS  
 hodiny = pygame.time.Clock()  
 
 class foloweri_class: 
-    def __init__(self, x, y): 
+    def __init__(self, x, y, obrazek): 
         self.x = x 
-        self.y = y 
+        self.y = y
+        self.obrazek = obrazek
  
- 
+ #class foloweri_class_obrazky: 
+   # def  
+        
  
  
  
 foloweri = [] 
 for i in range(pocet_foloweri): 
-    foloweri.append(foloweri_class(random.randint(velikost, ROZLISENI_X - velikost), random.randint(velikost, ROZLISENI_Y - velikost))) 
+    foloweri.append(foloweri_class(random.randint(velikost, ROZLISENI_X - velikost), random.randint(velikost, ROZLISENI_Y - velikost), random.choice(foloweri_obrazky_list))) 
  
 
 # vytvoreni okna  
 okno = pygame.display.set_mode((ROZLISENI_X, ROZLISENI_Y))  
-pygame.display.set_caption('Strike')  
-  
+pygame.display.set_caption('Strike')
+
 # vykreslovaci smycka  
 while True:  
     # jake nastaly udalosti?  
@@ -136,7 +151,7 @@ while True:
         
         cislo_patra = cislo_patra + 1
         
-        pozice_x = 290
+        pozice_x = 315
         pozice_y = 415
         for i in range(pocet_foloweri):
             foloweri[i].x = random.randint(0, 290)
@@ -145,8 +160,8 @@ while True:
         if cislo_patra != 1:
             cislo_patra = cislo_patra - 1
             
-            pozice_x = 290
-            pozice_y = 415
+            pozice_x = 315
+            pozice_y = 265
             for i in range(pocet_foloweri):
                 foloweri[i].x = random.randint(0, 290)
                 foloweri[i].y = random.randint(200, 330)
@@ -209,12 +224,12 @@ while True:
                         foloweri[i].y += rychlost 
                     elif foloweri[i].y < foloweri[y].y: 
                         foloweri[i].y -= rychlost
-                        
 
-    
+                        
 #vykreslení folowerů
     for i in range(pocet_foloweri): 
-        pygame.draw.circle(okno, barva_foloweri, (foloweri[i].x, foloweri[i].y), velikost / 2) 
+        pygame.draw.circle(okno, barva_foloweri, (foloweri[i].x, foloweri[i].y), velikost / 2)
+        okno.blit(foloweri[i].obrazek,(foloweri[i].x, foloweri[i].y))
          
     pygame.draw.circle(okno,barva_hl,(pozice_x, pozice_y),velikost / 2) 
   #  pygame.draw.circle(okno,barva_foloweri,(x, y),velikost / 2) 
