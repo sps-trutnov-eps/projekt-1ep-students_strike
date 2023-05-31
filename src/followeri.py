@@ -28,16 +28,16 @@ pozadí_prizemi = pygame.image.load("chodba.png")
 pozadí_prizemi = pygame.transform.scale(pozadí_prizemi, (ROZLISENI_X , ROZLISENI_Y))
 pozadi_nadprizemi = pygame.image.load("chodba 1.png")
 pozadi_nadprizemi = pygame.transform.scale(pozadi_nadprizemi, (ROZLISENI_X , ROZLISENI_Y))
-folower_obrazek_1 = pygame.image.load("postava_black.png")
-folower_obrazek_1 = pygame.transform.scale(folower_obrazek_1, (velikost , velikost))
-folower_obrazek_2 = pygame.image.load("postava_blond.png")
-folower_obrazek_2 = pygame.transform.scale(folower_obrazek_2, (velikost , velikost))
-folower_obrazek_3 = pygame.image.load("postava_blue.png")
-folower_obrazek_3 = pygame.transform.scale(folower_obrazek_3, (velikost , velikost))
-folower_obrazek_4 = pygame.image.load("postava_pleska.png")
-folower_obrazek_4 = pygame.transform.scale(folower_obrazek_4, (velikost , velikost))
-folower_obrazek_5 = pygame.image.load("postava_purple.png")
-folower_obrazek_5 = pygame.transform.scale(folower_obrazek_5, (velikost , velikost))
+folower_obrazek_1 = pygame.image.load("postava_black-removebg-preview.png")
+folower_obrazek_1 = pygame.transform.scale(folower_obrazek_1, (velikost + 5 , velikost + 1))
+folower_obrazek_2 = pygame.image.load("postava_blond-removebg-preview.png")
+folower_obrazek_2 = pygame.transform.scale(folower_obrazek_2, (velikost + 5 , velikost + 1))
+folower_obrazek_3 = pygame.image.load("postava_blue-removebg-preview.png")
+folower_obrazek_3 = pygame.transform.scale(folower_obrazek_3, (velikost + 5 , velikost + 1))
+folower_obrazek_4 = pygame.image.load("postava_pleska-removebg-preview.png")
+folower_obrazek_4 = pygame.transform.scale(folower_obrazek_4, (velikost + 5 , velikost + 1))
+folower_obrazek_5 = pygame.image.load("postava_purple-removebg-preview.png")
+folower_obrazek_5 = pygame.transform.scale(folower_obrazek_5, (velikost + 5 , velikost + 1))
 cislo_patra = 1
 cislo_patra_font = pygame.font.Font(None, 72) # Font pro vykresení čísla patra
 foloweri_obrazky_list = [folower_obrazek_1, folower_obrazek_2, folower_obrazek_3, folower_obrazek_4, folower_obrazek_5]
@@ -52,10 +52,7 @@ class foloweri_class:
         self.y = y
         self.obrazek = obrazek
  
- #class foloweri_class_obrazky: 
-   # def  
         
- 
  
  
 foloweri = [] 
@@ -229,7 +226,7 @@ while True:
 #vykreslení folowerů
     for i in range(pocet_foloweri): 
         pygame.draw.circle(okno, barva_foloweri, (foloweri[i].x, foloweri[i].y), velikost / 2)
-        okno.blit(foloweri[i].obrazek,(foloweri[i].x, foloweri[i].y))
+        okno.blit(foloweri[i].obrazek,(foloweri[i].x - 4 - velikost / 2, foloweri[i].y - 0.5 - velikost / 2))
          
     pygame.draw.circle(okno,barva_hl,(pozice_x, pozice_y),velikost / 2) 
   #  pygame.draw.circle(okno,barva_foloweri,(x, y),velikost / 2) 
