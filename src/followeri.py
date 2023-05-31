@@ -38,7 +38,7 @@ hodiny = pygame.time.Clock()
 ucitel_active = False
 ucitel_start_patro = cislo_patra
 ucitel_spawn_interval = [2, 10]
-ucitel_spawn_time = 5
+ucitel_spawn_time = time.time() + 10
 def find_ucitel_spawn_time():
     ucitel_spawn_time = random.randint(ucitel_spawn_interval[0], ucitel_spawn_interval[1]) + time.time()
     return ucitel_spawn_time
@@ -222,13 +222,12 @@ while True:
     
     # Ucitel event
     if ucitel_active == False and ucitel_spawn_time < time.time():
-
         ucitel_start_patro = cislo_patra  
         ucitel = te.Teacher_event(okno,foloweri,(148,680),2,30) #*Měnění velikosti nefuguje správně
         ucitel_active = True
     if ucitel_active == True:
         foloweri = ucitel.update(foloweri)
-    if ucitel.teacher_done == True:
+    if ucitel_active and ucitel.teacher_done == True:
         ucitel_active = False
     if ucitel_start_patro is not cislo_patra:
         ucitel_active = False
