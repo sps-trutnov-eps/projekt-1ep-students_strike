@@ -2,6 +2,7 @@
 import sys  
 import random
 import time
+
 # pouzity framework  
 import pygame  
 # spusteni frameworku  
@@ -24,6 +25,7 @@ pozice_x = (ROZLISENI_X - velikost) / 2
 pozice_y = (ROZLISENI_Y - velikost) / 2  
 rychlost = 3 # pixely / frame
 
+
 pozadí_prizemi = pygame.image.load("chodba.png")
 pozadí_prizemi = pygame.transform.scale(pozadí_prizemi, (ROZLISENI_X , ROZLISENI_Y))
 pozadi_nadprizemi = pygame.image.load("chodba 1.png")
@@ -42,6 +44,7 @@ cislo_patra = 1
 cislo_patra_font = pygame.font.Font(None, 72) # Font pro vykresení čísla patra
 foloweri_obrazky_list = [folower_obrazek_1, folower_obrazek_2, folower_obrazek_3, folower_obrazek_4, folower_obrazek_5]
 
+
 navstiveny_třídy = []
 # pomocny objekt pro omezeni FPS  
 hodiny = pygame.time.Clock()  
@@ -51,14 +54,26 @@ class foloweri_class:
         self.x = x 
         self.y = y
         self.obrazek = obrazek
- 
+class foloweri_class_rotace:
         
+    def __init__(self, x, y, rotace):
+        self.rotace = rotace
+        self.x = x 
+        self.y = y
  
- 
-foloweri = [] 
+foloweri = []
+foloweri_rotace = []
 for i in range(pocet_foloweri): 
-    foloweri.append(foloweri_class(random.randint(velikost, ROZLISENI_X - velikost), random.randint(velikost, ROZLISENI_Y - velikost), random.choice(foloweri_obrazky_list))) 
- 
+    foloweri.append(foloweri_class(random.randint(velikost, ROZLISENI_X - velikost), random.randint(velikost, ROZLISENI_Y - velikost), random.choice(foloweri_obrazky_list)))
+    if foloweri[i].x > pozice_x: 
+        foloweri_rotace.append(foloweri_class_rotace(foloweri[i].x, foloweri[i].y, (270)))
+    elif foloweri[i].x < pozice_x: 
+        foloweri_rotace.append(foloweri_class_rotace(foloweri[i].x, foloweri[i].y, (90)))
+    if foloweri[i].y > pozice_y: 
+        foloweri_rotace.append(foloweri_class_rotace(foloweri[i].x, foloweri[i].y, (0)))
+    elif foloweri[i].y < pozice_y: 
+        foloweri_rotace.append(foloweri_class_rotace(foloweri[i].x, foloweri[i].y, (180))) 
+
 
 # vytvoreni okna  
 okno = pygame.display.set_mode((ROZLISENI_X, ROZLISENI_Y))  
@@ -89,8 +104,9 @@ while True:
     if klavesy[pygame.K_DOWN]:  
         pozice_y += rychlost  
     if klavesy[pygame.K_UP]:  
-        pozice_y -= rychlost  
-      
+        pozice_y -= rychlost   
+    
+    
 #kolize hráče
     if pozice_x > ROZLISENI_X - velikost / 2:  
         pozice_x = ROZLISENI_X - velikost / 2 
@@ -164,14 +180,17 @@ while True:
                 foloweri[i].y = random.randint(200, 330)
        
      
- 
+    for i in range(pocet_foloweri):
+        foloweri[i].obrazek = pygame.transform.rotate(foloweri[i].obrazek, foloweri_rotace[i].rotace)
      
     # stanoveni barvy pozadi
     if cislo_patra == 1:
         okno.blit(pozadí_prizemi, (0, 0))
     elif cislo_patra >= 2:
         okno.blit(pozadi_nadprizemi, (0, 0))
-    
+#
+
+
      
 #kolize foloweru na hrace
     for i in range(pocet_foloweri): 
