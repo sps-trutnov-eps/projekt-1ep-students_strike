@@ -11,35 +11,33 @@ cervena_barva = (255, 0, 0)
 modra_barva = (0, 0, 255)
 zelena_barva = (0, 255, 0)
 
-class hrac1(object): 
-     
-    def __init__(self): 
-        self.rect = pygame.Rect(400, 580, 50, 20) 
-     
-    def move(self, dx, dy): 
-  
-        if dx != 0: 
-            self.move_single_axis(dx, 0) 
-        if dy != 0: 
-            self.move_single_axis(0, dy) 
-             
-    def draw(self, surface): 
-        pygame.draw.rect(surface, self.color, self.rect) 
-             
-       
-    def move_single_axis(self, dx, dy): 
-         
-        # pohyb 
-        self.rect.x += dx 
-        self.rect.y += dy 
+PLOSINA_šířka = 100
+PLOSINA_výška = 20
+výška = 600
+šířka = 800 
 
 okno = pygame.display.set_mode((800, 600))
 pygame.display.set_caption("minihra")
 
+class PLOSINA(pygame.sprite.Sprite):
+    def __init__(self):
+        super().__init__()
+        self.image = pygame.Surface((PLOSINA_šířka, PLOSINA_výška))
+        self.image.fill(modra_barva)
+        self.rect = self.image.get_rect()
+        self.rect.x = (šířka - PLOSINA_šířka) // 2
+        self.rect.y = výška - PLOSINA_výška
 
+    def update(self):
+        # Pohyb plošinky s myší
+        pos = pygame.mouse.get_pos()
+        self.rect.x = pos[0]
+        # Omezení pohybu plošinky na obrazovce
+        if self.rect.x > WIDTH - PADDLE_WIDTH:
+            self.rect.x = WIDTH - PADDLE_WIDTH
 
 clock = pygame.time.Clock()
-hrac1 = hrac1()
+PLOSINA = PLOSINA()
 
 running = True 
 while running: 
@@ -63,7 +61,7 @@ while running:
    
     
 
-    pygame.draw.rect(okno,(modra_barva) , hrac1.rect)
+    pygame.draw.rect(okno,(modra_barva) , PLOSINA.rect)
     
     font1 = pygame.font.Font(None, 30)
     znamka1 = font1.render("1", True, ((zelena_barva)))
