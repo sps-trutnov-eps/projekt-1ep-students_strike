@@ -42,6 +42,8 @@ folower_obrazek_4 = pygame.image.load("postava_pleska-removebg-preview.png")
 folower_obrazek_4 = pygame.transform.scale(folower_obrazek_4, (velikost + 5 , velikost + 1))
 folower_obrazek_5 = pygame.image.load("postava_purple-removebg-preview.png")
 folower_obrazek_5 = pygame.transform.scale(folower_obrazek_5, (velikost + 5 , velikost + 1))
+main_postava = pygame.image.load("main_character.png")
+main_postava = pygame.transform.scale(main_postava, (velikost + 3 , velikost + 12))
 cislo_patra = 1
 cislo_patra_font = pygame.font.Font(None, 72) # Font pro vykresení čísla patra
 čas_font = pygame.font.Font(None, 50)
@@ -78,8 +80,10 @@ while True:
             # vypnuti frameworku  
             pygame.quit()  
             # vypnuti aplikace  
-            sys.exit()  
-  
+            sys.exit()
+    
+    
+    
 #ovladani pomoci klavesnice  
     klavesy = pygame.key.get_pressed()  
       
@@ -88,7 +92,7 @@ while True:
         sys.exit()  
 #ovládání hráće
     if klavesy[pygame.K_RIGHT]:  
-        pozice_x += rychlost  
+        pozice_x += rychlost
     if klavesy[pygame.K_LEFT]:  
         pozice_x -= rychlost  
     if klavesy[pygame.K_DOWN]:  
@@ -169,7 +173,7 @@ while True:
                 foloweri[i].x = random.randint(0, 290)
                 foloweri[i].y = random.randint(200, 330)
        
-     
+    
 
      
     # stanoveni barvy pozadi
@@ -178,7 +182,7 @@ while True:
     elif cislo_patra >= 2:
         okno.blit(pozadi_nadprizemi, (0, 0))
 #
-
+    
 
      
 #kolize foloweru na hrace
@@ -235,6 +239,8 @@ while True:
     for i in range(pocet_foloweri): 
         pygame.draw.circle(okno, barva_foloweri, (foloweri[i].x, foloweri[i].y), velikost / 2)
         okno.blit(foloweri[i].obrazek,(foloweri[i].x - 4 - velikost / 2, foloweri[i].y - 0.5 - velikost / 2))
+        
+    
          
     pygame.draw.circle(okno,barva_hl,(pozice_x, pozice_y),velikost / 2) 
   #  pygame.draw.circle(okno,barva_foloweri,(x, y),velikost / 2) 
@@ -246,6 +252,7 @@ while True:
     okno.blit(text1, (50, ROZLISENI_Y/2- 200))
     okno.blit(text2, (50, ROZLISENI_Y/2 + 125))
     okno.blit(čas, (ROZLISENI_X - 95, 0))
+    okno.blit(main_postava, (pozice_x - 3 - velikost / 2, pozice_y - velikost / 2))
     # prekresleni obsahu okna  
     pygame.display.update()  
     # zastropovani FPS  
