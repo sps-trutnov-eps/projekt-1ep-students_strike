@@ -2,6 +2,9 @@ import pygame
 import sys
 pygame.init()
 
+
+found_staple = False     
+found_compasses = False   
 clock = pygame.time.Clock()
 screen = pygame.display.set_mode((1280, 720))
 black = (0,0,0)
@@ -53,10 +56,10 @@ while game:
     screen.blit(table_skin_closed, (930, 450))
     screen.blit(table_skin_closed, (750, 330))
     screen.blit(table_skin_closed, (930, 330))
-   
-    tables = [table1,table2,table3,table4,table5,table6,table7,table8,table9,table10,table11,table12]
-    #mouse = pygame.mouse.get_pressed()
-    #if mouse[0]:
+    if found_staple:
+        screen.blit(staple,(1215,660))
+    if found_compasses:
+        screen.blit(compasses,(1160,660))
     for event in pygame.event.get():
         if event.type == pygame.MOUSEBUTTONUP:
             mx = pygame.mouse.get_pos()[0]
@@ -66,11 +69,12 @@ while game:
             text = 'you found a staple'
             text2 = 'you found a compasses'
             text3 = 'door is blocked'
-            
+            text4 = 'you escaped'
+
             if table1.collidepoint(mx, my):
                 screen.blit(table_skin_open, (30, 450))
-                screen.blit(staple,(1215,660))
-                ne = screen.blit(font.render(text, True, (0, 0, 0)), (400, 360))
+                found_staple = True 
+                screen.blit(font.render(text, True, (0, 0, 0)), (400, 360))
                 pygame.display.update()
                 pygame.time.wait(2000)
             if table2.collidepoint(mx, my):
@@ -99,8 +103,8 @@ while game:
                 pygame.time.wait(2000)
             if table8.collidepoint(mx, my):
                 screen.blit(table_skin_open, (930, 330))
-                screen.blit(compasses,(1150,660))
                 screen.blit(font.render(text2, True, (0, 0, 0)), (400, 360))
+                found_compasses = True
                 pygame.display.update()
                 pygame.time.wait(2000)
             if table9.collidepoint(mx, my):
@@ -123,20 +127,18 @@ while game:
                 screen.blit(font.render(text3, True, (0, 0, 0)), (400, 360))
                 pygame.display.update()
                 pygame.time.wait(2000)
-                #if ano:
-                    #screen.blit(table_skin_open, (450, 360))
-
+            if found_staple and found_compasses:
+                #pygame.time.wait(2000)
+                screen.blit(font.render(text4, True, (0, 0, 0)), (470, 560))
+                pygame.display.update()
+                pygame.time.wait(2000)
+                pygame.quit()
+                #Vrácení parametrů - ukončení funkce
+                
     
     keys = pygame.key.get_pressed()
     if keys[pygame.K_ESCAPE]:
         pygame.quit()
         sys.exit()
-    
-    #if collide mouse idk s staple:
-        #screen.blit(staple,(1150,660))
-    #if collide mouse idk s staple:
-        #screen.blit(compasses,(1150,660))
-        
-        
-    
+
     pygame.display.update()
