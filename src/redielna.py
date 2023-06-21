@@ -60,9 +60,21 @@ while True:
     
     okno.blit(reditelna, (0, 0))
     pygame.draw.circle(okno,barva_hl,(pozice_x, pozice_y),velikost / 2)
-    if counter > 5:
+    if counter > 5 and counter < 8:
         text1 = text_1_font.render(("Co tu chceš? "), True, CERNA_BARVA)
         okno.blit(text1, (840, 600))
+    if counter > 10 and counter < 15:
+        text2 = text_1_font.render(("Jdu se zeptat, zda bychom mohli odejít ze školy. "), True, CERNA_BARVA)
+        okno.blit(text2, (100, 200))
+    if counter > 17 and counter < 20:
+        text3 = text_1_font.render(("A kolik vás tu je? "), True, CERNA_BARVA)
+        okno.blit(text3, (820, 600))
+    
+    
+    
+    
+    
+    
     
     if pozice_x < 660:
         pozice_x += 2
