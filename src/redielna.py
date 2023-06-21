@@ -24,7 +24,8 @@ y = 10
 pozice_x = 50  
 pozice_y = 355  
 rychlost = 3 # pixely / frame
-
+counter, text = 0, '0'.rjust(3)
+pygame.time.set_timer(pygame.USEREVENT, 1000)
 pozadí_prizemi = pygame.image.load("chodba.png")
 pozadí_prizemi = pygame.transform.scale(pozadí_prizemi, (ROZLISENI_X , ROZLISENI_Y))
 pozadi_nadprizemi = pygame.image.load("chodba 1.png")
@@ -51,19 +52,21 @@ while True:
             pygame.quit()  
             # vypnuti aplikace  
             sys.exit()
-    
+        if udalost.type == pygame.USEREVENT:
+            counter += 1
+            
     
     
     
     okno.blit(reditelna, (0, 0))
     pygame.draw.circle(okno,barva_hl,(pozice_x, pozice_y),velikost / 2)
-    
+    if counter > 5:
+        text1 = text_1_font.render(("Co tu chceš? "), True, CERNA_BARVA)
+        okno.blit(text1, (840, 600))
     
     if pozice_x < 660:
         pozice_x += 2
-    if pozice_x == 660:
-        text1 = text_1_font.render(("Co tu chceš? "), True, CERNA_BARVA)
-        okno.blit(text1, (840, 600))
+
     
    
          
