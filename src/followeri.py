@@ -4,7 +4,9 @@ import random
 import time
 import teacher_event as te
 # pouzity framework  
-import pygame  
+import pygame
+# import miniher
+from minihry.found_the_items.main import game as found_the_items
 # spusteni frameworku  
 pygame.init()  
   
@@ -133,7 +135,7 @@ while True:
         cislo_dveri = cislo_patra * 10 + poradi_dveri
         if cislo_dveri not in navstiveny_třídy:
             navstiveny_třídy.append(cislo_dveri)
-            print("baf 5") 
+            pocet_foloweri +=  found_the_items(okno, hodiny)
     
     if pozice_x > 1065 and pozice_x < 1180 and pozice_y > ROZLISENI_Y - (5 + velikost) and pozice_y < ROZLISENI_Y and klavesy[pygame.K_e]:
         poradi_dveri = 6
