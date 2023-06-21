@@ -231,6 +231,8 @@ while True:
         ucitel_active = False
     if ucitel_start_patro is not cislo_patra:
         ucitel_active = False
+        ucitel_start_patro = cislo_patra
+        ucitel_spawn_time = find_ucitel_spawn_time()
     if ucitel_active == False and ucitel_spawn_time < time.time() and ucitel.teacher_done == True:
         ucitel_spawn_time = find_ucitel_spawn_time()
     
