@@ -35,8 +35,8 @@ table_skin_closed = pygame.image.load('tableclosed.png')
 table_skin_closed = pygame.transform.scale(table_skin_closed, (160, 80))
 table_skin_open = pygame.image.load('table.png')
 table_skin_open = pygame.transform.scale(table_skin_open, (160, 110))
-game = True
-while game:
+hra = True
+while hra:
     clock.tick(FPS)
     for udalost in pygame.event.get():
         if udalost.type == pygame.QUIT:
@@ -124,16 +124,16 @@ while game:
                 pygame.display.update()
                 pygame.time.wait(2000)
             if door.collidepoint(mx, my):
-                screen.blit(font.render(text3, True, (0, 0, 0)), (400, 360))
+                if found_staple and found_compasses:
+                    screen.blit(font.render(text4, True, (0, 0, 0)), (470, 360))
+                    pygame.display.update()
+                    pygame.time.wait(2000)
+                    pygame.quit()
+                    #Vrácení parametrů - ukončení funkce
+                screen.blit(font.render(text3, True, (0, 0, 0)), (470, 360))
                 pygame.display.update()
                 pygame.time.wait(2000)
-            if found_staple and found_compasses:
-                #pygame.time.wait(2000)
-                screen.blit(font.render(text4, True, (0, 0, 0)), (470, 560))
-                pygame.display.update()
-                pygame.time.wait(2000)
-                pygame.quit()
-                #Vrácení parametrů - ukončení funkce
+
                 
     
     keys = pygame.key.get_pressed()
