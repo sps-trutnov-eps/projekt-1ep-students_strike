@@ -24,6 +24,8 @@ z = 0
 pozice_x = (ROZLISENI_X - velikost) / 2  
 pozice_y = (ROZLISENI_Y - velikost) / 2  
 rychlost = 3 # pixely / frame
+čas_po = time.time()
+čas_hry = 10 #v minutách
 
 
 pozadí_prizemi = pygame.image.load("chodba.png")
@@ -42,6 +44,7 @@ folower_obrazek_5 = pygame.image.load("postava_purple-removebg-preview.png")
 folower_obrazek_5 = pygame.transform.scale(folower_obrazek_5, (velikost + 5 , velikost + 1))
 cislo_patra = 1
 cislo_patra_font = pygame.font.Font(None, 72) # Font pro vykresení čísla patra
+čas_font = pygame.font.Font(None, 50)
 foloweri_obrazky_list = [folower_obrazek_1, folower_obrazek_2, folower_obrazek_3, folower_obrazek_4, folower_obrazek_5]
 
 
@@ -54,25 +57,12 @@ class foloweri_class:
         self.x = x 
         self.y = y
         self.obrazek = obrazek
-class foloweri_class_rotace:
-        
-    def __init__(self, x, y, rotace):
-        self.rotace = rotace
-        self.x = x 
-        self.y = y
  
 foloweri = []
 foloweri_rotace = []
 for i in range(pocet_foloweri): 
     foloweri.append(foloweri_class(random.randint(velikost, ROZLISENI_X - velikost), random.randint(velikost, ROZLISENI_Y - velikost), random.choice(foloweri_obrazky_list)))
-    if foloweri[i].x > pozice_x: 
-        foloweri_rotace.append(foloweri_class_rotace(foloweri[i].x, foloweri[i].y, (270)))
-    elif foloweri[i].x < pozice_x: 
-        foloweri_rotace.append(foloweri_class_rotace(foloweri[i].x, foloweri[i].y, (90)))
-    if foloweri[i].y > pozice_y: 
-        foloweri_rotace.append(foloweri_class_rotace(foloweri[i].x, foloweri[i].y, (0)))
-    elif foloweri[i].y < pozice_y: 
-        foloweri_rotace.append(foloweri_class_rotace(foloweri[i].x, foloweri[i].y, (180))) 
+ 
 
 
 # vytvoreni okna  
@@ -180,8 +170,7 @@ while True:
                 foloweri[i].y = random.randint(200, 330)
        
      
-    for i in range(pocet_foloweri):
-        foloweri[i].obrazek = pygame.transform.rotate(foloweri[i].obrazek, foloweri_rotace[i].rotace)
+
      
     # stanoveni barvy pozadi
     if cislo_patra == 1:
@@ -241,7 +230,7 @@ while True:
                     elif foloweri[i].y < foloweri[y].y: 
                         foloweri[i].y -= rychlost
 
-                        
+                
 #vykreslení folowerů
     for i in range(pocet_foloweri): 
         pygame.draw.circle(okno, barva_foloweri, (foloweri[i].x, foloweri[i].y), velikost / 2)
@@ -253,8 +242,10 @@ while True:
     #vykreslení čísel pater
     text1 = cislo_patra_font.render(("Patro " + str(cislo_patra + 1)), True, CERNA_BARVA)
     text2 = cislo_patra_font.render(("Patro " + str(cislo_patra- 1) ), True, CERNA_BARVA)
+    čas = čas_font.render(str(round((čas_hry + čas_po / 60 - time.time() / 60),2)), True, CERNA_BARVA)
     okno.blit(text1, (50, ROZLISENI_Y/2- 200))
     okno.blit(text2, (50, ROZLISENI_Y/2 + 125))
+    okno.blit(čas, (ROZLISENI_X - 95, 0))
     # prekresleni obsahu okna  
     pygame.display.update()  
     # zastropovani FPS  
