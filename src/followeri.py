@@ -39,7 +39,7 @@ hodiny = pygame.time.Clock()
 # fáze eventů
 ucitel_active = False
 ucitel_start_patro = cislo_patra
-ucitel_spawn_interval = [2, 10]
+ucitel_spawn_interval = [2, 25]
 ucitel_spawn_time = time.time() + 10
 def find_ucitel_spawn_time():
     ucitel_spawn_time = random.randint(ucitel_spawn_interval[0], ucitel_spawn_interval[1]) + time.time()
@@ -53,10 +53,13 @@ class foloweri_class:
  
  
  
- 
-foloweri = [] 
-for i in range(pocet_foloweri): 
-    foloweri.append(foloweri_class(random.randint(velikost, ROZLISENI_X - velikost), random.randint(velikost, ROZLISENI_Y - velikost))) 
+def regen_followers():
+    foloweri = []
+    print(pocet_foloweri) 
+    for i in range(pocet_foloweri): 
+        foloweri.append(foloweri_class(random.randint(velikost, ROZLISENI_X - velikost), random.randint(velikost, ROZLISENI_Y - velikost))) 
+        return foloweri
+foloweri = regen_followers()
  
 
 # vytvoreni okna  
@@ -136,6 +139,8 @@ while True:
         if cislo_dveri not in navstiveny_třídy:
             navstiveny_třídy.append(cislo_dveri)
             pocet_foloweri +=  found_the_items(okno, hodiny)
+            foloweri = regen_followers()
+            print(foloweri)
     
     if pozice_x > 1065 and pozice_x < 1180 and pozice_y > ROZLISENI_Y - (5 + velikost) and pozice_y < ROZLISENI_Y and klavesy[pygame.K_e]:
         poradi_dveri = 6
@@ -174,7 +179,9 @@ while True:
     
      
 #kolize foloweru na hrace
+    print(len(foloweri))
     for i in range(pocet_foloweri): 
+
         distance = ((pozice_x - foloweri[i].x) ** 2 + (pozice_y - foloweri[i].y) ** 2) ** 0.5 
         if distance > velikost + 10: 
             if foloweri[i].x > pozice_x: 
