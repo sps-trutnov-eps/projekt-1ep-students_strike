@@ -32,8 +32,7 @@ pozadi_nadprizemi = pygame.transform.scale(pozadi_nadprizemi, (ROZLISENI_X , ROZ
 reditelna = pygame.image.load("obrázky/reditelna.png")
 reditelna = pygame.transform.scale(reditelna, (ROZLISENI_X , ROZLISENI_Y))
 venek = pygame.image.load("obrázky/před-školou.png")
-cislo_patra = 1
-cislo_patra_font = pygame.font.Font(None, 72) # Font pro vykresení čísla patra
+text_1_font = pygame.font.Font(None, 72)
 
 navstiveny_třídy = []
 # pomocny objekt pro omezeni FPS  
@@ -56,14 +55,18 @@ while True:
     
     
     
-    
-    pozice_x += 2
-    
-    if pozice_x > 660:
-        pozice_x = 660
-    
     okno.blit(reditelna, (0, 0))
-    pygame.draw.circle(okno,barva_hl,(pozice_x, pozice_y),velikost / 2)        
+    pygame.draw.circle(okno,barva_hl,(pozice_x, pozice_y),velikost / 2)
+    
+    
+    if pozice_x < 660:
+        pozice_x += 2
+    if pozice_x == 660:
+        text1 = text_1_font.render(("Co tu chceš? "), True, CERNA_BARVA)
+        okno.blit(text1, (840, 600))
+    
+   
+         
     # prekresleni obsahu okna  
     pygame.display.update()  
     # zastropovani FPS  
