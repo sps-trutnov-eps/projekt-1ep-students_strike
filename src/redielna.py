@@ -21,8 +21,8 @@ povoleni = 0
 velikost = 50 
 x = 10 
 y = 10 
-pozice_x = (ROZLISENI_X - velikost) / 2  
-pozice_y = (ROZLISENI_Y - velikost) / 2  
+pozice_x = 50  
+pozice_y = 355  
 rychlost = 3 # pixely / frame
 
 pozadí_prizemi = pygame.image.load("chodba.png")
@@ -52,8 +52,18 @@ while True:
             pygame.quit()  
             # vypnuti aplikace  
             sys.exit()
-            
+    
+    
+    
+    
+    
+    pozice_x += 2
+    
+    if pozice_x > 660:
+        pozice_x = 660
+    
     okno.blit(reditelna, (0, 0))
+    pygame.draw.circle(okno,barva_hl,(pozice_x, pozice_y),velikost / 2)        
     # prekresleni obsahu okna  
     pygame.display.update()  
     # zastropovani FPS  
