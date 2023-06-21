@@ -35,37 +35,37 @@ hl_postava_postoj_rect.x = -28
 hl_postava_postoj_rect.y = 106
 
 enemy1_postoj = pygame.image.load("enemy1_postoj.png")
-enemy1_postoj = pygame.transform.scale(enemy1_postoj, (450,250))
+enemy1_postoj = pygame.transform.scale(enemy1_postoj, (100,80))
 enemy1_postoj_rect = enemy1_postoj.get_rect()
-enemy1_postoj_rect.x = -190
-enemy1_postoj_rect.y = -15
+enemy1_postoj_rect.x = 100
+enemy1_postoj_rect.y = 15
 
 enemy2_postoj = pygame.image.load("enemy2.png")
-enemy2_postoj = pygame.transform.scale(enemy2_postoj, (300,160))
+enemy2_postoj = pygame.transform.scale(enemy2_postoj, (100,80))
 enemy2_postoj_rect = enemy2_postoj.get_rect()
-enemy2_postoj_rect.x = -110
-enemy2_postoj_rect.y = 195
+enemy2_postoj_rect.x = 100
+enemy2_postoj_rect.y = 130
 
 enemy3 = pygame.image.load("enemy3.png")
-enemy3 = pygame.transform.scale(enemy3, (300,160))
+enemy3 = pygame.transform.scale(enemy3, (100,80))
 enemy3_rect = enemy3.get_rect()
-enemy3_rect.x = -110
-enemy3_rect.y = 300
+enemy3_rect.x = 100
+enemy3_rect.y = 230
 
 enemy4 = pygame.image.load("enemy4.png")
-enemy4 = pygame.transform.scale(enemy4, (300,160))
+enemy4 = pygame.transform.scale(enemy4, (100,80))
 enemy4_rect = enemy4.get_rect()
-enemy4_rect.x = -110
-enemy4_rect.y = 400
+enemy4_rect.x = 100
+enemy4_rect.y = 50
 
 enemy5 = pygame.image.load("enemy5.png")
-enemy5 = pygame.transform.scale(enemy5, (300,160))
+enemy5 = pygame.transform.scale(enemy5, (100,80))
 enemy5_rect = enemy5.get_rect()
 enemy5_rect.x = -110
 enemy5_rect.y = 500
 
 enemy6 = pygame.image.load("enemy6.png")
-enemy6 = pygame.transform.scale(enemy6, (300,160))
+enemy6 = pygame.transform.scale(enemy6, (100,80))
 enemy6_rect = enemy6.get_rect()
 enemy6_rect.x = -110
 enemy6_rect.y = 600
@@ -103,31 +103,31 @@ while True:
     minule_stisknuto =  klavesa[pygame.K_SPACE]
     
     enemy1_postoj_rect.x += enemy1_rychlost
-    if enemy1_postoj_rect.x > 1009:
-        enemy1_postoj_rect.x = 1009
+    if enemy1_postoj_rect.x > 1178:
+        enemy1_postoj_rect.x = 1178
        
     
     enemy2_postoj_rect.x += enemy2_rychlost
-    if enemy2_postoj_rect.x > 1090:
-        enemy2_postoj_rect.x = 1090
+    if enemy2_postoj_rect.x > 1178:
+        enemy2_postoj_rect.x = 1178
         
         
     enemy3_rect.x += enemy3_rychlost
-    if enemy3_rect.x > 1090:
-        enemy3_rect.x = 1090
+    if enemy3_rect.x > 1178:
+        enemy3_rect.x = 1178
 
     enemy4_rect.x += enemy4_rychlost
-    if enemy4_rect.x > 1090:
-        enemy4_rect.x = 1090
+    if enemy4_rect.x > 1178:
+        enemy4_rect.x = 1178
         
     
     enemy5_rect.x += enemy5_rychlost
-    if enemy5_rect.x > 1090:
-        enemy5_rect.x = 1090
+    if enemy5_rect.x > 1178:
+        enemy5_rect.x = 1178
         
     enemy6_rect.x += enemy6_rychlost
-    if enemy6_rect.x > 1090:
-        enemy6_rect.x = 1090
+    if enemy6_rect.x > 1178:
+        enemy6_rect.x = 1178
         
     
         
@@ -136,7 +136,7 @@ while True:
         
 
     timer_text = font.render(f"{time_left}", True, (255,255,255))
-    hitbox_c = pygame.draw.rect(screen, (0,0,0),(w -50, 0, w, h))
+    
     screen.blit(bg, bg_rect)
     screen.blit(hl_postava_postoj, hl_postava_postoj_rect)
     screen.blit(enemy1_postoj, enemy1_postoj_rect)
@@ -146,6 +146,7 @@ while True:
     screen.blit(enemy4, enemy4_rect)
     screen.blit(enemy5, enemy5_rect)
     screen.blit(enemy6, enemy6_rect)
+    hitbox_c = pygame.draw.rect(screen, (0,0,0),(w - 5, 0, w, h))
     
     kolize1 = pygame.Rect.colliderect(enemy1_postoj_rect, hitbox_c)
     kolize2 = pygame.Rect.colliderect(enemy2_postoj_rect, hitbox_c)
@@ -154,10 +155,11 @@ while True:
     kolize5 = pygame.Rect.colliderect(enemy5_rect, hitbox_c)
     kolize6 = pygame.Rect.colliderect(enemy6_rect, hitbox_c)
     
-    if kolize1:
+    if kolize2:
         screen.blit(prohra, (0, 0))
-    
-    
+  
+        
+        
     pygame.display.update()
     
     clock.tick(FPS)
