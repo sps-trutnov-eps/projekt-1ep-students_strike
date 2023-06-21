@@ -70,7 +70,12 @@ def game(okno, hodiny, pocet_foloweri):
         if counter > 22 and counter < 25:
             text4 = text_1_font.render((str(pocet_foloweri) ), True, CERNA_BARVA)
             okno.blit(text4, (660, 200))
-        
+        if pocet_foloweri < pozadavek:
+            text5 = text_1_font.render(("Ne, je vás moc málo. " ), True, CERNA_BARVA)
+            okno.blit(text5, (820, 600))
+        elif:
+            
+            
         
         
         
