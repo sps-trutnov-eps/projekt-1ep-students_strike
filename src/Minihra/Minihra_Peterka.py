@@ -7,7 +7,7 @@ clock = pygame.time.Clock()
 FPS = 60
 w = 1280
 h = 720
-rychlost = 13
+rychlost = 15
 enemy1_rychlost = 2.5
 enemy2_rychlost = 4
 enemy3_rychlost = 2.4
@@ -28,11 +28,11 @@ bg_rect = bg.get_rect()
 bg_width = bg.get_width()
 
 hl_postava_postoj = pygame.image.load("běžec_postoj.png")
-hl_postava_postoj = pygame.transform.scale(hl_postava_postoj,(150,150))
+hl_postava_postoj = pygame.transform.scale(hl_postava_postoj,(100,80))
 hl_postava_postoj = pygame.transform.rotate(hl_postava_postoj, 353)
 hl_postava_postoj_rect = hl_postava_postoj.get_rect()
 hl_postava_postoj_rect.x = -28
-hl_postava_postoj_rect.y = 96
+hl_postava_postoj_rect.y = 125
 
 enemy1_postoj = pygame.image.load("enemy1_postoj.png")
 enemy1_postoj = pygame.transform.scale(enemy1_postoj, (100,80))
