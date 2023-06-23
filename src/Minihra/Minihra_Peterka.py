@@ -29,10 +29,10 @@ bg_width = bg.get_width()
 
 hl_postava_postoj = pygame.image.load("běžec_postoj.png")
 hl_postava_postoj = pygame.transform.scale(hl_postava_postoj,(100,80))
-hl_postava_postoj = pygame.transform.rotate(hl_postava_postoj, 353)
+hl_postava_postoj = pygame.transform.rotate(hl_postava_postoj, 360)
 hl_postava_postoj_rect = hl_postava_postoj.get_rect()
 hl_postava_postoj_rect.x = -28
-hl_postava_postoj_rect.y = 125
+hl_postava_postoj_rect.y = 130
 
 enemy1_postoj = pygame.image.load("enemy1_postoj.png")
 enemy1_postoj = pygame.transform.scale(enemy1_postoj, (100,80))
