@@ -58,7 +58,7 @@ def regen_followers():
     print(pocet_foloweri) 
     for i in range(pocet_foloweri): 
         foloweri.append(foloweri_class(random.randint(velikost, ROZLISENI_X - velikost), random.randint(velikost, ROZLISENI_Y - velikost))) 
-        return foloweri
+    return foloweri
 foloweri = regen_followers()
  
 
@@ -140,7 +140,6 @@ while True:
             navstiveny_třídy.append(cislo_dveri)
             pocet_foloweri +=  found_the_items(okno, hodiny)
             foloweri = regen_followers()
-            print(foloweri)
     
     if pozice_x > 1065 and pozice_x < 1180 and pozice_y > ROZLISENI_Y - (5 + velikost) and pozice_y < ROZLISENI_Y and klavesy[pygame.K_e]:
         poradi_dveri = 6
@@ -179,7 +178,7 @@ while True:
     
      
 #kolize foloweru na hrace
-    print(len(foloweri))
+    print("Follower count " + str(len(foloweri)))
     for i in range(pocet_foloweri): 
 
         distance = ((pozice_x - foloweri[i].x) ** 2 + (pozice_y - foloweri[i].y) ** 2) ** 0.5 

@@ -125,7 +125,7 @@ def game(screen, clock):
                         screen.blit(font.render(text4, True, (0, 0, 0)), (470, 360))
                         pygame.display.update()
                         pygame.time.wait(2000)
-                        return 0 #Vždy vrátí nula studentů
+                        return 1 #Vždy vrátí nula(uz ne :D, vraci jednicku ted) studentů
                     screen.blit(font.render(text3, True, (0, 0, 0)), (470, 360))
                     pygame.display.update()
                     pygame.time.wait(2000)
